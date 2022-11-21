@@ -1,5 +1,5 @@
 name: Tests
-run-name: End-to-end and unit tests for schema validation BE
+run-name: End-to-end and unit tests
 on:
   push:
     branches:
