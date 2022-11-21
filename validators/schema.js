@@ -21,5 +21,5 @@ const schemaValidator = (instance, schema) => {
 };
 
 module.exports = {
-  schemaValidator,
+  schemaValidator
 };

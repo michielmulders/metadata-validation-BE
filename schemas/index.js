@@ -15,5 +15,6 @@ const getSchema = (version) => {
 }
 
 module.exports = {
-    getSchema
+    getSchema,
+    defaultVersion
 }

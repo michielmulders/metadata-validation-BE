@@ -6,7 +6,7 @@ const collections = require('../services/collections');
 const { validator } = require('../validators');
 const { converter, decode } = require('../helpers/URI');
 const { errorFormatter } = require('../errors');
-const { getSchema } = require('../schemas');
+const { getSchema, defaultVersion } = require('../schemas');
 
 router.get('/', (req, res, next) => {
   res.status(200).json({ msg: "This is the NFT router"});
@@ -69,6 +69,7 @@ router.get('/:id/:serial', async (req, res, next) => {
         tokenId: id,
         serial,
         cache: true,
+        version: req.query.version || defaultVersion,
         created: cachedata.data[0].created_at
       }
     })
@@ -101,7 +102,8 @@ router.get('/:id/:serial', async (req, res, next) => {
         meta: {
           tokenId: id,
           serial,
-          cache: false
+          cache: false,
+          version: req.query.version || defaultVersion
         }
       })
     }
@@ -117,7 +119,8 @@ router.get('/:id/:serial', async (req, res, next) => {
       meta: {
         tokenId: id,
         serial,
-        cache: false
+        cache: false,
+        version: req.query.version || defaultVersion
       }
     })
   } catch (error) {

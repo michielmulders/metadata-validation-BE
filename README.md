@@ -40,10 +40,14 @@ Each metadata object goes through four validation steps:
 
 **Options:**
 - \<network\> (optional): Change the network for the request. You can either pass `mainnet` or `testnet`. `mainnet` is the default value, so you can omit this option.
+- \<version\> (optional): Change the schema version against which you want to validate the NFT's metadata. `1.0.0` is the default value and validates against HIP412@1.0.0 version.
 
 **Example requests:**
 - http://localhost:3000/nfts/0.0.1043046/507
 - http://localhost:3000/nfts/0.0.1350444/2343?network=testnet
+- http://localhost:3000/nfts/0.0.1350444/2343?network=testnet&version=1.0.0
+- http://localhost:3000/nfts/0.0.1350444/2343?version=1.0.0
+
 
 **Response:**
 Success response for an NFT that complies with HIP412 standard (e.g. `http://localhost:3000/nfts/0.0.1350444/2343`):
@@ -74,6 +78,7 @@ Success response for an NFT that complies with HIP412 standard (e.g. `http://loc
     "tokenId": "0.0.1350444",
     "serial": "2343",
     "cache": true,
+    "version": "1.0.0",
     "created": "2022-11-18 11:16:27"
   }
 }
@@ -126,6 +131,7 @@ Failure response for an NFT that doesn't comply with HIP412 standard:
     "tokenId": "0.0.1043046",
     "serial": "507",
     "cache": true,
+    "version": "1.0.0",
     "created": "2022-11-18 11:35:30"
   }
 }
@@ -152,8 +158,8 @@ For example:
 }
 ```
 
-
-**Options:** /
+**Options:**
+- \<version\> (optional): Change the schema version against which you want to validate the NFT's metadata. `1.0.0` is the default value and validates against HIP412@1.0.0 version.
 
 **Response:**
 
