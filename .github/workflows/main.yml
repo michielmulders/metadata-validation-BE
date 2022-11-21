@@ -8,5 +8,8 @@ jobs:
   test:
     runs-on: ubuntu-latest
     steps:
-      - name: Excecute end-to-end tests
-        run: npm run test
+      - uses: actions/checkout@v2
+      - name: Install modules
+        run: yarn
+      - name: Run end-to-end tests
+        run: yarn test
