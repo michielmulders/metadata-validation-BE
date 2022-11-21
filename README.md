@@ -1,11 +1,6 @@
 ![GitHub CI](https://github.com/michielmulders/metadata-validation-BE/actions/workflows/main.yml/badge.svg)
 
 
-// http://localhost:3000/nfts/0.0.1043046/507
-// http://localhost:3000/nfts/0.0.1350444/2343?network=testnet (default mainnet) -> find other example with testnet NFT
-// http://localhost:3000/nfts/metadata
-
-
 # Metadata Schema Validation (Backend)
 
 **Goal:** Verify metadata (user input or on-chain data) against the [HIP412@1.0.0](https://bafkreid2hxgyhhwtgkrzouwx4tk7kczhs6riydhpvisqq7pxofrllyftku.ipfs.nftstorage.link/) standard defined in [HIP412](https://hips.hedera.com/hip/hip-412). The tool caches responses for each new NFT ID.
