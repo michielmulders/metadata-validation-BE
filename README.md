@@ -10,20 +10,19 @@
 ## How does the tool validate JSON metadata?
 Each metadata object goes through four validation steps:
 
-1. Schema validation using [jsonschema package](https://www.npmjs.com/package/jsonschema) (`Error type: schema`)
+1. **Schema validation using [jsonschema package](https://www.npmjs.com/package/jsonschema)** (`Error type: schema`)
+--> Use the `jsonschema` package to verify the metadata against [HIP412@1.0.0](https://bafkreid2hxgyhhwtgkrzouwx4tk7kczhs6riydhpvisqq7pxofrllyftku.ipfs.nftstorage.link/) standard.
 
-Use the `jsonschema` package to verify the metadata against [HIP412@1.0.0](https://bafkreid2hxgyhhwtgkrzouwx4tk7kczhs6riydhpvisqq7pxofrllyftku.ipfs.nftstorage.link/) standard.
 
-
-2. Attribute validation (`Error type: attribute`)
+2. **Attribute validation** (`Error type: attribute`)
 --> Specific validator for attributes object that describe an NFT. Supports all [display types](https://github.com/hashgraph/hedera-improvement-proposal/blob/main/HIP/hip-412.md#attributesdisplay_type) such as `text`, `boolean`, `percentage`, `boost`, `datetime` or `date`, and `color`.
 
 
-3. Localization validation (`Error type: localization`)
+3. **Localization validation** (`Error type: localization`)
 --> Specific validator for [localization object](https://github.com/hashgraph/hedera-improvement-proposal/blob/main/HIP/hip-412.md#localization). Checks for two-letter language codes, default locale should not appear in the `locales` array, and the `localization.uri` URI format.
 
 
-4. SHA256 validation (`Error type: SHA256`)
+4. **SHA256 validation** (`Error type: SHA256`)
 --> Specific validator to verify `checksum` properties which contain a SHA256 hash. 
 
 
@@ -31,7 +30,7 @@ Use the `jsonschema` package to verify the metadata against [HIP412@1.0.0](https
 
 ## Routes
 
-### GET /nfts/<tokenId>/<serial>?network=<mainnet|testnet>
+### GET /nfts/\<tokenId\>/\<serial\>?network=<mainnet|testnet>
 
 **Purpose:** Retrieve a validation report for a specific NFT ID on mainnet or testnet, validated against HIP412. 
 
