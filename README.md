@@ -23,7 +23,7 @@ Each metadata object goes through four validation steps:
 
 
 4. **SHA256 validation** (`Error type: SHA256`)
---> Specific validator to verify `checksum` properties which contain a SHA256 hash. 
+--> Specific validator to verify [`checksum` properties](https://github.com/hashgraph/hedera-improvement-proposal/blob/main/HIP/hip-412.md#checksum) which contain a SHA256 hash. 
 
 
 **Important exception: The validation of the metadata stops when the metadata contains one or multiple schema errors. It doesn't make sense to continue validating other properties because they may not be present in the metadata. However, if the metadata has all the required properties the metadata validation continues. The code ignores "additional property errors" because those don't affect the HIP412 validation. This behaviour has been implemented to provide NFT creators with all information they need to make their NFT compliant with the HIP412 standard.**
