@@ -6,13 +6,15 @@ const collections = require('../services/collections');
 const { validator } = require('../validators');
 const { converter, decode } = require('../helpers/URI');
 const { errorFormatter } = require('../errors');
+const { getSchema } = require('../schemas');
 
 router.get('/', (req, res, next) => {
   res.status(200).json({ msg: "This is the NFT router"});
 });
 
 // Route 1: Verify metadata, accept JSON string -> Return true/false and errors per category
-// Each route supports query parameter ?network=mainnet/testnet (default = mainnet)
+// Route supports query parameter ?network=mainnet/testnet (default = mainnet)
+// Route supports query parameter ?version=1.0.0 (default = 1.0.0)
 router.post('/metadata', async (req, res, next) => {
   let metadata;
   try {
@@ -21,7 +23,8 @@ router.post('/metadata', async (req, res, next) => {
     return next(errorFormatter("Failed to parse metadata to JSON"));
   }
 
-  const errors = validator(metadata);
+  const schema = getSchema(req.query.version);
+  const errors = validator(metadata, schema);
   if (errors.length > 0) {
     return res.status(200).json({
       success: false,
@@ -44,13 +47,14 @@ router.post('/metadata', async (req, res, next) => {
 });
 
 // Route 2: Accept NFT ID (token id + serial) -> Return: validation status, errors, metadata
-// Each route supports query parameter ?network=mainnet/testnet (default = mainnet)
+// Route supports query parameter ?network=mainnet/testnet (default = mainnet)
+// Route supports query parameter ?version=1.0.0 (default = 1.0.0)
 router.get('/:id/:serial', async (req, res, next) => {
   const id = req.params.id;
   const serial = req.params.serial;
   const nftId = `${id}/${serial}`;
   const network = req.query.network || "mainnet";
-
+  
   // Check if collection exists in cache
   const cachedata = collections.getNFTById(nftId);
   if (cachedata.data.length > 0) {
@@ -83,7 +87,8 @@ router.get('/:id/:serial', async (req, res, next) => {
 
     const metadata = await axios.get(URIObject.URI);
     // if metadata contains schema errors (except if it only contains "additional property errors"), it won't validate attributes, localization, and SHA256 properties because these properties might not be present
-    const errors = validator(metadata.data);
+    const schema = getSchema(req.query.version);
+    const errors = validator(metadata.data, schema);
     if (errors.length > 0) {
       collections.create(nftId, id, serial, 0, network, JSON.stringify(metadata.data), JSON.stringify(errors));
       return res.status(200).json({

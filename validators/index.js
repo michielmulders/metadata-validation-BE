@@ -3,11 +3,11 @@ const { localizationValidator } = require("./localization");
 const { SHA256Validator } = require("./SHA256");
 const { schemaValidator } = require("./schema");
 
-const validator = (instance) => {
+const validator = (instance, schema) => {
     let errors = [];
 
     // When errors against the schema are found, you don't want to continue verifying the NFT
-    const schemaErrors = schemaValidator(instance);
+    const schemaErrors = schemaValidator(instance, schema);
     if (schemaErrors.length > 0) {
         // However we don't want to continue if it only contains "additional property" errors because they don't hinder the further verification of the NFT
         const additionalPropertyMsg = "is not allowed to have the additional property";

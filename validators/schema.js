@@ -1,4 +1,4 @@
-const schema = require("../schemas/HIP412@1.0.0.json");
+const { getSchema } = require("../schemas");
 
 const Validator = require("jsonschema").Validator;
 const validator = new Validator();
@@ -6,7 +6,7 @@ const validator = new Validator();
 /*
  * @desc: schema validator -> verifies instance against JSON schema HIP412@1.0.0
  */
-const schemaValidator = (instance) => {
+const schemaValidator = (instance, schema) => {
   const errors = [];
   let result = validator.validate(instance, schema);
 
