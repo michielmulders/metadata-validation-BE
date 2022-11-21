@@ -134,7 +134,110 @@ Failure response for an NFT that doesn't comply with HIP412 standard:
 
 ### POST /nfts/metadata
 
-**Purpose:**
-**Request:**
-**Options:**
+**Purpose:** Retrieve a validation report for metadata submitted by a user, validated against HIP412.
+
+**Request:** 
+
+```json
+{
+  "metadata": "Stringified JSON metadata object"
+}
+```
+
+For example:
+
+```json
+{
+    "metadata": "{\"creator\":\"HANGRY BARBOONS\",\"description\":\"HANGRY BARBOONS are 4,444 unique citizens from the United Hashgraph of Planet Earth. Designed and illustrated by President HANGRY.\",\"format\":\"none\",\"name\":\"HANGRY BARBOON #9\",\"image\":\"ipfs://QmZMbVWp8wAZZW12tnd9L1CbwU6xQc8zMeeyTcDWBjZ6zz/9.png\",\"type\":\"image/png\",\"properties\":{\"edition\":9,\"extras\":\"Clown\"},\"files\":[{\"uri\":\"ipfs://QmaHVnnp7qAmGADa3tQfWVNxxZDRmTL5r6jKrAo16mSd5y/9.png\",\"type\":\"image/png\",\"metadata\":{\"name\":\"444\",\"creator\":\"HANGRY BARBOONS\"}}],\"attributes\":[{\"trait_type\":\"Background\",\"value\":\"Holographic\"},{\"trait_type\":\"Arm\",\"value\":\"Clown Hamster\"}]}"
+}
+```
+
+
+**Options:** /
+
 **Response:**
+
+Response format:
+
+```json
+{
+  "success": "true/false -> validation successful?",
+  "msg": "Extra information for the frontend",
+  "data": {
+    "errors": "Contains all metadata errors",
+    "metadata": "Returned user-submitted metadata for reference"
+  }
+}
+```
+
+Here's a success response:
+
+```json
+{
+  "success": true,
+  "msg": "Metadata has been verified successfully",
+  "data": {
+    "errors": {},
+    "metadata": {
+      "creator": "HANGRY BARBOONS",
+      "description": "HANGRY BARBOONS are 4,444 unique citizens from the United Hashgraph of Planet Earth. Designed and illustrated by President HANGRY.",
+      "format": "none",
+      "name": "HANGRY BARBOON #9",
+      "image": "ipfs://QmZMbVWp8wAZZW12tnd9L1CbwU6xQc8zMeeyTcDWBjZ6zz/9.png",
+      "type": "image/png",
+      "properties": {
+        "edition": 9,
+        "extras": "Clown"
+      },
+      "files": [
+        {
+          "uri": "ipfs://QmaHVnnp7qAmGADa3tQfWVNxxZDRmTL5r6jKrAo16mSd5y/9.png",
+          "type": "image/png",
+          "metadata": {
+            "name": "444",
+            "creator": "HANGRY BARBOONS"
+          }
+        }
+      ],
+      "attributes": [
+        {
+          "trait_type": "Background",
+          "value": "Holographic"
+        }
+      ]
+    }
+  }
+}
+```
+
+Here's a failure response:
+
+```json
+{
+  "success": false,
+  "msg": "Metadata contains one or multiple errors",
+  "data": {
+    "errors": [
+      {
+        "type": "schema",
+        "msg": "is not allowed to have the additional property \"category\""
+      }
+    ],
+    "metadata": {
+      "name": "Hashcrab",
+      "description": "Hashcrabs is one of the earliest NFT projects on Hedera Hashgraph. Generation 2.0 is designed in a 2D, pixelated, generative art style with various rarity traits. The etymology of Hashcrabs stems from the Hedera Hashgraph community and the native token $HBAR being commonly referred to as a “crab coin”. This is due to the “crabbing” market trend of $HBAR fluctuating around the same price over a long period of time, neither entering a bull nor bear market. As such, its movement mimics that of a crab moving side-to-side.",
+      "creator": "Hashcrabs",
+      "category": "Collectible",
+      "image": "ipfs://QmPLGM9xt5fXKYSah3guxeXQUHH1UM6RqNdtGRa6LsES7t",
+      "type": "image/png",
+      "attributes": [
+        {
+          "trait_type": "7 Background",
+          "value": "Hex #20d6c7"
+        }
+      ]
+    }
+  }
+}
+
+```
