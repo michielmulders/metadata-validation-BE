@@ -64,7 +64,7 @@ const attributesValidator = (instance) => {
 
     // Check datetime format: should be integer e.g. 732844800
     if (
-      attribute.display_type === "datetime" &&
+      attribute.display_type === "datetime" || attribute.display_type === "date" &&
       !Number.isInteger(attribute.value)
     ) {
       errors.push({
