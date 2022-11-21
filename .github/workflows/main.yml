@@ -1,4 +1,4 @@
-name: Backend workflow
+name: Tests
 run-name: End-to-end and unit tests for schema validation BE
 on:
   push:
