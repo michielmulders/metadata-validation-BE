@@ -30,16 +30,16 @@ Each metadata object goes through four validation steps:
 
 ## Routes
 
-### GET /nfts/\<tokenId\>/\<serial\>?network=<mainnet|testnet>
+### GET /nfts/\<tokenId\>/\<serial\>?network=\<mainnet|testnet\>
 
 **Purpose:** Retrieve a validation report for a specific NFT ID on mainnet or testnet, validated against HIP412. 
 
 **Parameters:**
-- <tokenId>: Token ID in the format of "0.0.XXXXXX"
-- <serial>: Serial number of NFT you want to look up (number)
+- \<tokenId\>: Token ID in the format of "0.0.XXXXXX"
+- \<serial\>: Serial number of NFT you want to look up (number)
 
 **Options:**
-- <network> (optional): Change the network for the request. You can either pass `mainnet` or `testnet`. `mainnet` is the default value, so you can omit this option.
+- \<network\> (optional): Change the network for the request. You can either pass `mainnet` or `testnet`. `mainnet` is the default value, so you can omit this option.
 
 **Example requests:**
 - http://localhost:3000/nfts/0.0.1043046/507
