@@ -3,10 +3,9 @@ let router = express.Router();
 const axios = require('axios');
 
 const collections = require('../services/collections');
-const { validator } = require('../validators');
 const { converter, decode } = require('../helpers/URI');
 const { errorFormatter } = require('../errors');
-const { getSchema, defaultVersion } = require('../schemas');
+const { validator, defaultVersion } = require('@michielmulders/hip412-validator')
 
 router.get('/', (req, res, next) => {
   res.status(200).json({ msg: "This is the NFT router"});
@@ -23,8 +22,7 @@ router.post('/metadata', async (req, res, next) => {
     return next(errorFormatter("Failed to parse metadata to JSON"));
   }
 
-  const schema = getSchema(req.query.version);
-  const errors = validator(metadata, schema);
+  const errors = validator(metadata, req.query.version);
   if (errors.length > 0) {
     return res.status(200).json({
       success: false,
@@ -88,8 +86,7 @@ router.get('/:id/:serial', async (req, res, next) => {
 
     const metadata = await axios.get(URIObject.URI);
     // if metadata contains schema errors (except if it only contains "additional property errors"), it won't validate attributes, localization, and SHA256 properties because these properties might not be present
-    const schema = getSchema(req.query.version);
-    const errors = validator(metadata.data, schema);
+    const errors = validator(metadata.data, req.query.version);
     if (errors.length > 0) {
       collections.create(nftId, id, serial, 0, network, JSON.stringify(metadata.data), JSON.stringify(errors));
       return res.status(200).json({
