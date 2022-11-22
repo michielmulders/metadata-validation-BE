@@ -5,7 +5,7 @@ const axios = require('axios');
 const collections = require('../services/collections');
 const { converter, decode } = require('../helpers/URI');
 const { errorFormatter } = require('../errors');
-const { validator, defaultVersion } = require('@michielmulders/hip412-validator')
+const { validator, defaultVersion } = require('@michielmulders/hip412-validator');
 
 router.get('/', (req, res, next) => {
   res.status(200).json({ msg: "This is the NFT router"});

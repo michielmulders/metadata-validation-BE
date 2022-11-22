@@ -7,6 +7,34 @@
 
 **Tooling:** Node.js app using Express.js for routing, Jest and Supertest for testing, Sqlite3 for database storage (caching results and metadata), and jsonschema for metadata validation against the HIP412 JSON schema.
 
+## How to run this project
+
+Install dependencies:
+
+```bash
+npm install
+```
+
+Create a `.env` file and add `ENVIRONMENT=dev`. By setting the `.env` to `test`, you will use a different sqlite database file called `testnfts.db`. When you run `npm run test`, it will automatically set the `ENVIRONMENT=test` value. When you want to use it in production, just set the value to `ENVIRONMENT=prod` to use the `nfts.db` database file.
+
+Start the backend with:
+
+```bash
+npm start
+```
+
+If you want to use `nodemon` when you are developing, use:
+
+```bash
+npm run dev
+```
+
+If you want to run the end-to-end tests, use:
+
+```bash
+npm test
+```
+
 ## How does the tool validate JSON metadata?
 Each metadata object goes through four validation steps:
 
