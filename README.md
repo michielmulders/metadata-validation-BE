@@ -292,3 +292,7 @@ schemaMap.set('<version>', myCustomSchema); // Add your schema to the map
 ```
 
 When you've added your schema to the map, you can validate against your schema version by sending a request to the API with the `?version=<version>` query. Replace `<version>` with the version you've set in the `schemaMap` map. 
+
+## Questions or Improvement Proposals?
+
+Please create an issue or PR on [this repository](https://github.com/michielmulders/metadata-validation-BE). Make sure to join the [Hedera Discord server](https://hedera.com/discord) to ask questions or discuss improvement suggestions.
