@@ -5,16 +5,30 @@ const Database = require('better-sqlite3');
 const dbName = process.env.ENVIRONMENT === "test" ? "testnfts.db" : "nfts.db";
 const db = new Database(dbName);
 
+/**
+ * @param {string} sql - Query
+ * @param {Array<string>} params - Input parameters for query
+ * @returns {Object}
+ */
 function query(sql, params) {
   return db.prepare(sql).all(params);
 }
 
+/**
+ * @param {string} sql - Query
+ * @param {Object} params - Input object where the key names match the insert values in the sql query
+ * @returns {Object}
+ */
 function run(sql, params) {
   return db.prepare(sql).run(params);
 }
 
+/**
+ * 
+ * @param {string} sql - Query
+ */
 function exec(sql) {
-  return db.exec(sql);
+  db.exec(sql);
 }
 
 /* SQL Commands */

@@ -15,7 +15,7 @@ Install dependencies:
 npm install
 ```
 
-Create a `.env` file and add `ENVIRONMENT=dev`. By setting the `.env` to `test`, you will use a different sqlite database file called `testnfts.db`. When you run `npm run test`, it will automatically set the `ENVIRONMENT=test` value. When you want to use it in production, just set the value to `ENVIRONMENT=prod` to use the `nfts.db` database file.
+Create a `.env` file and add `ENVIRONMENT=dev`. By setting the `.env` to `test`, you will use a different sqlite database file called `testnfts.db`. When you run `npm run test`, it will automatically set the `ENVIRONMENT=test` value. When you want to use it in production, just set the value to `ENVIRONMENT=prod` to use the `nfts.db` database file. You can also change the port by setting the `PORT=5000` variable in the `.env` file. By default, the app runs on port `3000`.
 
 Start the backend with:
 
@@ -198,7 +198,7 @@ Response format:
   "success": "true/false -> validation successful?",
   "msg": "Extra information for the frontend",
   "data": {
-    "errors": "Contains all metadata errors",
+    "errors": "Array of all metadata errors",
     "metadata": "Returned user-submitted metadata for reference"
   }
 }
@@ -275,23 +275,6 @@ Here's a failure response:
 }
 
 ```
-
-## Add custom schema versions
-
-You can add custom JSON schemas to the `/schemas` folder. 
-
-You can then add the version to the `schemaMap` in `/schema/index.js` using the following code:
-
-```js
-const HIP412_1_0_0 = require("./HIP412@1.0.0.json");
-const myCustomSchema = require("./myschema.json"); // import your schema
-
-const schemaMap = new Map();
-schemaMap.set('1.0.0', HIP412_1_0_0);
-schemaMap.set('<version>', myCustomSchema); // Add your schema to the map
-```
-
-When you've added your schema to the map, you can validate against your schema version by sending a request to the API with the `?version=<version>` query. Replace `<version>` with the version you've set in the `schemaMap` map. 
 
 ## Questions or Improvement Proposals?
 
