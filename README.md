@@ -15,7 +15,7 @@ Install dependencies:
 npm install
 ```
 
-Create a `.env` file and add `ENVIRONMENT=dev`. By setting the `.env` to `test`, you will use a different sqlite database file called `testnfts.db`. When you run `npm run test`, it will automatically set the `ENVIRONMENT=test` value. When you want to use it in production, just set the value to `ENVIRONMENT=prod` to use the `nfts.db` database file. You can also change the port by setting the `PORT=5000` variable in the `.env` file. By default, the app runs on port `3000`.
+Create a `.env` file and add `ENVIRONMENT=dev`. By setting the `.env` to `test`, you will use a different sqlite database file called `testnfts.db`. When you run `npm run test`, it will automatically set the `ENVIRONMENT=test` value. When you want to use it in production, just set the value to `ENVIRONMENT=prod` to use the `nfts.db` database file. You can also change the port by setting the `PORT=5000` variable in the `.env` file. By default, the app runs on port `4000`.
 
 Start the backend with:
 
@@ -71,14 +71,14 @@ Each metadata object goes through four validation steps:
 - \<version\> (optional): Change the schema version against which you want to validate the NFT's metadata. `1.0.0` is the default value and validates against HIP412@1.0.0 version.
 
 **Example requests:**
-- http://localhost:3000/nfts/0.0.1043046/507
-- http://localhost:3000/nfts/0.0.1350444/2343?network=testnet
-- http://localhost:3000/nfts/0.0.1350444/2343?network=testnet&version=1.0.0
-- http://localhost:3000/nfts/0.0.1350444/2343?version=1.0.0
+- http://localhost:4000/nfts/0.0.1043046/507
+- http://localhost:4000/nfts/0.0.1350444/2343?network=testnet
+- http://localhost:4000/nfts/0.0.1350444/2343?network=testnet&version=1.0.0
+- http://localhost:4000/nfts/0.0.1350444/2343?version=1.0.0
 
 
 **Response:**
-Success response for an NFT that complies with HIP412 standard (e.g. `http://localhost:3000/nfts/0.0.1350444/2343`):
+Success response for an NFT that complies with HIP412 standard (e.g. `http://localhost:4000/nfts/0.0.1350444/2343`):
 
 ```json
 {
