@@ -1,8 +1,9 @@
+require("dotenv").config();
+
 const express = require('express');
 const cookieParser = require('cookie-parser');
 const logger = require('morgan');
-
-require("dotenv").config();
+const cors = require('cors');
 
 const { errorLogger, errorResponder, invalidPathHandler } = require('./errors');
 
@@ -11,12 +12,15 @@ const nftsRouter = require('./routes/nfts');
 
 const app = express();
 
+app.use(cors())
 app.use(logger('dev'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 
 /* Routes */
+const origin = process.env.ORIGIN;
+app.options(origin, cors())
 app.use('/', indexRouter);
 app.use('/nfts', nftsRouter);
 

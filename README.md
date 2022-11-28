@@ -15,7 +15,11 @@ Install dependencies:
 npm install
 ```
 
-Create a `.env` file and add `ENVIRONMENT=dev`. By setting the `.env` to `test`, you will use a different sqlite database file called `testnfts.db`. When you run `npm run test`, it will automatically set the `ENVIRONMENT=test` value. When you want to use it in production, just set the value to `ENVIRONMENT=prod` to use the `nfts.db` database file. You can also change the port by setting the `PORT=5000` variable in the `.env` file. By default, the app runs on port `4000`.
+Create a `.env` file and add `ENVIRONMENT=dev`. By setting the `.env` to `test`, you will use a different sqlite database file called `testnfts.db`. When you run `npm run test`, it will automatically set the `ENVIRONMENT=test` value. When you want to use it in production, just set the value to `ENVIRONMENT=prod` to use the `nfts.db` database file. 
+
+You can also change the port by setting the `PORT=5000` variable in the `.env` file. By default, the app runs on port `4000`.
+
+More, you can also set the allowed origin (CORS) by changing the address for the ENV var `ORIGIN=http://localhost3000` allowing the frontend to make requests to our backend.
 
 Start the backend with:
 
