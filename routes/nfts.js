@@ -7,6 +7,11 @@ const { converter, decode } = require('../helpers/URI');
 const { errorFormatter } = require('../errors');
 const { validator, defaultVersion } = require('@michielmulders/hip412-validator');
 
+const axiosInstance = axios.create({
+  timeout: 5000,
+  headers: {'accept-encoding': '*'}
+});
+
 router.get('/', (req, res, next) => {
   res.status(200).json({ msg: "This is the NFT router"});
 });
@@ -22,13 +27,14 @@ router.post('/metadata', async (req, res, next) => {
     return next(errorFormatter("Failed to parse metadata to JSON"));
   }
 
-  const errors = validator(metadata, req.query.version);
-  if (errors.length > 0) {
+  const problems = validator(metadata, req.query.version);
+  if (problems.errors.length > 0 || problems.warnings.length > 0) {
     return res.status(200).json({
       success: false,
       msg: "Metadata contains one or multiple errors",
       data: {
-        errors,
+        errors: problems.errors,
+        warnings: problems.warnings,
         metadata
       }
     })
@@ -39,6 +45,7 @@ router.post('/metadata', async (req, res, next) => {
     msg: "Metadata has been verified successfully",
     data: {
       errors: {},
+      warnings: {},
       metadata
     }
   })
@@ -61,6 +68,7 @@ router.get('/:id/:serial', async (req, res, next) => {
       msg: `Retrieved metadata validatiy from cache for ${id}`,
       data: {
         errors: JSON.parse(cachedata.data[0].errors),
+        warnings: JSON.parse(cachedata.data[0].warnings),
         metadata: JSON.parse(cachedata.data[0].metadata)
       },
       meta: {
@@ -78,22 +86,23 @@ router.get('/:id/:serial', async (req, res, next) => {
       ? `https://mainnet-public.mirrornode.hedera.com/api/v1/tokens/${id}/nfts/${serial}/`
       : `https://testnet.mirrornode.hedera.com/api/v1/tokens/${id}/nfts/${serial}/`;
 
-    const nftInfo = await axios.get(tokenInfoURI);
+    const nftInfo = await axiosInstance.get(tokenInfoURI);
     const URIObject = converter(nftInfo.data.metadata);
     if (!URIObject.success) {
       return next(errorFormatter("Unsupported metadata URI for NFT", { URI: decode(nftInfo.data.metadata) }))
     }
 
-    const metadata = await axios.get(URIObject.URI);
+    const metadata = await axiosInstance.get(URIObject.URI);
     // if metadata contains schema errors (except if it only contains "additional property errors"), it won't validate attributes, localization, and SHA256 properties because these properties might not be present
-    const errors = validator(metadata.data, req.query.version);
-    if (errors.length > 0) {
-      collections.create(nftId, id, serial, 0, network, JSON.stringify(metadata.data), JSON.stringify(errors));
+    const problems = validator(metadata.data, req.query.version);
+    if (problems.errors.length > 0 || problems.warnings.length > 0) {
+      collections.create(nftId, id, serial, 0, network, JSON.stringify(metadata.data), JSON.stringify(problems.warnings), JSON.stringify(problems.errors));
       return res.status(200).json({
         success: false,
-        msg: "Metadata contains one or multiple errors",
+        msg: "Metadata contains warnings or errors",
         data: {
-          errors,
+          errors: problems.errors,
+          warnings: problems.warnings,
           metadata: metadata.data
         },
         meta: {
@@ -105,12 +114,13 @@ router.get('/:id/:serial', async (req, res, next) => {
       })
     }
 
-    collections.create(nftId, id, serial, 1, network, JSON.stringify(metadata.data), JSON.stringify([]));
+    collections.create(nftId, id, serial, 1, network, JSON.stringify(metadata.data), JSON.stringify([]), JSON.stringify([]));
     return res.status(200).json({
       success: true,
       msg: "Metadata has been verified successfully",
       data: {
         errors: {},
+        warnings: {},
         metadata: metadata.data
       },
       meta: {

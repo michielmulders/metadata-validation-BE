@@ -20,16 +20,17 @@ function getNFTById(nftId) {
  * @param {number} isConform - A '1' (true) indicates no errors against HIP412 metadata standard, a '0' (false) is not conform
  * @param {string} network - network type: mainnet or testnet
  * @param {string} metadata - Stringified metadata
+ * @param {string} warnings - Stringified warnings
  * @param {string} errors - Stringified metadata errors object
  * @returns {boolean} success
  */
-function create(nftId, tokenId, serial, isConform, network, metadata, errors) {
-  const result = db.run('INSERT INTO collections (nft_id, token_id, serial, is_conform, network, metadata, errors) VALUES (@nft_id, @token_id, @serial, @is_conform, @network, @metadata, @errors)', {
+function create(nftId, tokenId, serial, isConform, network, metadata, warnings, errors) {
+  const result = db.run('INSERT INTO collections (nft_id, token_id, serial, is_conform, network, metadata, warnings, errors) VALUES (@nft_id, @token_id, @serial, @is_conform, @network, @metadata, @warnings, @errors)', {
     "nft_id": nftId,
     "token_id": tokenId,
     serial,
     "is_conform": isConform, 
-    network, metadata, errors
+    network, metadata, warnings, errors
   });
   
   let success = false;

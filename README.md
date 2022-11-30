@@ -126,13 +126,19 @@ Failure response for an NFT that doesn't comply with HIP412 standard:
     "errors": [
       {
         "type": "schema",
-        "msg": "is not allowed to have the additional property \"imagePreview\""
+        "msg": "is not allowed to have the additional property 'imagePreview'",
+        "path": "instance.imagePreview"
       },
       {
         "type": "schema",
-        "msg": "is not allowed to have the additional property \"traitType\""
+        "msg": "is not allowed to have the additional property 'traitType'",
+        "path": "instance.attributes[0]"
       },
-      { "type": "schema", "msg": "requires property \"type\"" }
+      { 
+        "type": "schema",
+        "msg": "requires property 'type'",
+        "path": "instance"
+      }
     ],
     "metadata": {
       "name": "Ashfall Founders' Token",

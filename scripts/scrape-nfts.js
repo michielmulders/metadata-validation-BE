@@ -1,4 +1,8 @@
 const axios = require("axios");
+const axiosInstance = axios.create({
+  timeout: 5000,
+  headers: {'accept-encoding': '*'}
+});
 
 const collections = require("../services/collections");
 const { validator } = require("../validators");
@@ -42,13 +46,13 @@ const tokens = [
 async function main() {
   try {
     for (let i = 0; i < tokens.length; i++) {
-      const tokenInfo = await axios.get(`${BASE_URL}${tokens[i].tokenId}/`);
+      const tokenInfo = await axiosInstance.get(`${BASE_URL}${tokens[i].tokenId}/`);
       const maxSerial = Number(tokenInfo.data.total_supply);
       console.log(`Started: ${tokens[i].name}`)
 
       for (let j = 1; j <= maxSerial; j++) {
         console.log(`Serial: ${j}`);
-        const nftInfo = await axios.get(
+        const nftInfo = await axiosInstance.get(
           `${BASE_URL}${tokens[i].tokenId}/nfts/${j}`
         );
         const URIObject = converter(nftInfo.data.metadata);
@@ -60,7 +64,7 @@ async function main() {
           break;
         }
 
-        const metadata = await axios.get(URIObject.URI);
+        const metadata = await axiosInstance.get(URIObject.URI);
 
         const errors = validator(metadata.data);
         const nftId = `${tokens[i].tokenId}/${j}`;

@@ -12,6 +12,8 @@ const nftsRouter = require('./routes/nfts');
 
 const app = express();
 
+const origin = process.env.ORIGIN;
+app.options(origin, cors())
 app.use(cors())
 app.use(logger('dev'));
 app.use(express.json());
@@ -19,8 +21,6 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 
 /* Routes */
-const origin = process.env.ORIGIN;
-app.options(origin, cors())
 app.use('/', indexRouter);
 app.use('/nfts', nftsRouter);
 
