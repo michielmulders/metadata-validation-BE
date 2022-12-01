@@ -93,15 +93,28 @@ async function scrapeNFTs() {
 
       if (!URIObject.success) {
         console.log(`[ERR] Could not convert URI for: ${tokens[i].tokenId} - Name: ${tokens[i].name} - Skipping this token.`);
-        break;
+        continue;
       }
 
       let metadata;
+      let failedFetching = false;
       try {
         metadata = await axiosInstance.get(URIObject.URI);
       } catch (error) {
-        console.log(`[ERR] Could not fetch data for: ${tokens[i].tokenId} - Name: ${tokens[i].name} - Skipping this token.`);
-        break;
+        console.log(`[ERR] Could not fetch data for: ${tokens[i].tokenId} - Name: ${tokens[i].name}`);
+        failedFetching = true;
+      }
+
+      if (failedFetching) {
+        sleep(10000)
+
+        console.log(`[WARN] Retry fetching information for token with token ID ${tokens[i].tokenId} and name ${tokens[i].name}`)
+        try {
+          metadata = await axiosInstance.get(URIObject.URI);
+        } catch (error) {
+          console.log(`[ERR] Attempt 2: Failed to fetch data for: ${tokens[i].tokenId}/${j} - Name: ${tokens[i].name} - Skipping this NFT ID`);
+          continue;
+        }
       }
       
       const problems = validator(metadata.data, defaultVersion);
@@ -131,15 +144,15 @@ async function scrapeNFTs() {
         }
       }
 
-      if (j % 100 === 0) {
+      if (j % 1000 === 0) {
         console.log(`[INFO] Sleep at serial ${j}`);
         sleep(10000);
       }
     }
 
     console.log(`[INFO] Finished: ${tokens[i].name}`)
-    console.log('[INFO] Sleep 30 seconds between NFTs')
-    sleep(30000);
+    console.log('[INFO] Sleep 10 seconds between NFTs')
+    sleep(10000);
   }
 }
 
