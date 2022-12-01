@@ -13,8 +13,7 @@
 const converter = (URI) => {
     // 1. Decode the base64 to UTF8 (Hedera's default encoding)
     const decodedURI = decode(URI);
-    console.log(decodedURI)
-    console.log('hier')
+
     // 2. Check URI type (HTTPS or IPFS) - if it's not supported, throw error)
     let result;
 
