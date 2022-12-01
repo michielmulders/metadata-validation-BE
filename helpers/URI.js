@@ -19,7 +19,7 @@ const converter = (URI) => {
     // A. Check for IPFS
     if (decodedURI.indexOf("ipfs://") === 0) {
         const CID = decodedURI.replace('ipfs://', '');
-        result = `https://ipfs.io/ipfs/${CID}`;
+        result = `${process.env.IPFS_GATEWAY}/ipfs/${CID}/?pinataGatewayToken=${process.env.PINATA_API_TOKEN}`;
     }
 
     // B. Check for HTTPS

@@ -81,46 +81,44 @@ router.get('/:id/:serial', async (req, res, next) => {
     })
   }
 
+  const tokenInfoURI = network === "mainnet" 
+    ? `https://mainnet-public.mirrornode.hedera.com/api/v1/tokens/${id}/nfts/${serial}/`
+    : `https://testnet.mirrornode.hedera.com/api/v1/tokens/${id}/nfts/${serial}/`;
+
+  let nftInfo;
   try {
-    const tokenInfoURI = network === "mainnet" 
-      ? `https://mainnet-public.mirrornode.hedera.com/api/v1/tokens/${id}/nfts/${serial}/`
-      : `https://testnet.mirrornode.hedera.com/api/v1/tokens/${id}/nfts/${serial}/`;
+    nftInfo = await axiosInstance.get(tokenInfoURI);
+  } catch (error) {
+    return next(errorFormatter(`Unable to fetch token information for ${nftId} (NFT ID doesn't exist)`));
+  }
+  
+  const URIObject = converter(nftInfo.data.metadata);
+  if (!URIObject.success) {
+    return next(errorFormatter("Unsupported metadata URI for NFT", { URI: decode(nftInfo.data.metadata) }))
+  }
 
-    const nftInfo = await axiosInstance.get(tokenInfoURI);
-    const URIObject = converter(nftInfo.data.metadata);
-    if (!URIObject.success) {
-      return next(errorFormatter("Unsupported metadata URI for NFT", { URI: decode(nftInfo.data.metadata) }))
-    }
+  let metadata;
+  try {
+    metadata = await axiosInstance.get(URIObject.URI);
+  } catch (error) {
+    return next(errorFormatter(`Unable to fetch metadata for ${nftId} using URI ${URIObject.URI}`));
+  }
 
-    const metadata = await axiosInstance.get(URIObject.URI);
-    // if metadata contains schema errors (except if it only contains "additional property errors"), it won't validate attributes, localization, and SHA256 properties because these properties might not be present
-    const problems = validator(metadata.data, req.query.version);
-    if (problems.errors.length > 0 || problems.warnings.length > 0) {
+  // if metadata contains schema errors (except if it only contains "additional property errors"), it won't validate attributes, localization, and SHA256 properties because these properties might not be present
+  const problems = validator(metadata.data, req.query.version);
+  if (problems.errors.length > 0 || problems.warnings.length > 0) {
+    try {
       collections.create(nftId, id, serial, 0, network, JSON.stringify(metadata.data), JSON.stringify(problems.warnings), JSON.stringify(problems.errors));
-      return res.status(200).json({
-        success: false,
-        msg: "Metadata contains warnings or errors",
-        data: {
-          errors: problems.errors,
-          warnings: problems.warnings,
-          metadata: metadata.data
-        },
-        meta: {
-          tokenId: id,
-          serial,
-          cache: false,
-          version: req.query.version || defaultVersion
-        }
-      })
+    } catch (error) {
+      return next(errorFormatter(`Unable to store metadata validation information for ${nftId}`));
     }
 
-    collections.create(nftId, id, serial, 1, network, JSON.stringify(metadata.data), JSON.stringify([]), JSON.stringify([]));
     return res.status(200).json({
-      success: true,
-      msg: "Metadata has been verified successfully",
+      success: false,
+      msg: "Metadata contains warnings or errors",
       data: {
-        errors: {},
-        warnings: {},
+        errors: problems.errors,
+        warnings: problems.warnings,
         metadata: metadata.data
       },
       meta: {
@@ -130,16 +128,29 @@ router.get('/:id/:serial', async (req, res, next) => {
         version: req.query.version || defaultVersion
       }
     })
-  } catch (error) {
-    let msg = "Something went wrong fetching or validating the NFT metdata";
-
-    // If token_id + serial combination doesn't exist, 404 is returned e.g. for this link https://testnet.mirrornode.hedera.com/api/v1/tokens/0.0.1270555/nfts/575/
-    if (error.response && error.response.data && error.response.data._status.messages[0].message === "Not found") {
-      msg = `NFT ID doesn't exist on the Hedera ${network}`;
-    }
-
-    return next(errorFormatter(msg))
   }
+
+  try {
+    collections.create(nftId, id, serial, 1, network, JSON.stringify(metadata.data), JSON.stringify([]), JSON.stringify([]));
+  } catch (error) {
+    return next(errorFormatter(`Unable to store metadata validation information for ${nftId}`));
+  }
+
+  return res.status(200).json({
+    success: true,
+    msg: "Metadata has been verified successfully",
+    data: {
+      errors: {},
+      warnings: {},
+      metadata: metadata.data
+    },
+    meta: {
+      tokenId: id,
+      serial,
+      cache: false,
+      version: req.query.version || defaultVersion
+    }
+  })
 });
 
 module.exports = router;

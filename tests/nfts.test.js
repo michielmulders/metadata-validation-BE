@@ -20,7 +20,7 @@ describe("GET /nfts/:id/:serial", () => {
       
       // Assert
       expect(res.statusCode).toBe(400);
-      expect(res.body.msg).toBe("NFT ID doesn't exist on the Hedera mainnet");
+      expect(res.body.msg).toBe("Unable to fetch token information for 0.0.11111/4567 (NFT ID doesn't exist)");
       expect(res.body.status).toBe(400);
       expect(res.body.data).toEqual({});
     });

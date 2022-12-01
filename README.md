@@ -21,6 +21,8 @@ You can also change the port by setting the `PORT=5000` variable in the `.env` f
 
 More, you can also set the allowed origin (CORS) by changing the address for the ENV var `ORIGIN=http://localhost3000` allowing the frontend to make requests to our backend.
 
+Lastly, set the `PINATA_API_TOKEN` because we are using the Pinata gateway to scrape metadata from IPFS and make sure to set the `IPFS_GATEWAY` to the correct address. If you want to use a public (free - not recommended due to throttling issues) gateway, change line 22 at `/helpers/URI.js`.
+
 Start the backend with:
 
 ```bash
