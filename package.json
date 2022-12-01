@@ -5,7 +5,7 @@
   "scripts": {
     "start": "node server",
     "dev": "nodemon server.js",
-    "test": "cross-env ENVIRONMENT=test jest --testTimeout=5000 --detectOpenHandles"
+    "test": "cross-env ENVIRONMENT=test ORIGIN=http://localhost3000 jest --testTimeout=5000 --detectOpenHandles"
   },
   "dependencies": {
     "@michielmulders/hip412-validator": "^1.0.7",
