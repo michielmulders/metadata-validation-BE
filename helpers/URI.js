@@ -40,6 +40,8 @@ const converter = (URI) => {
 
     // Does not support Arweave or other protocols
     if (result == undefined) {
+        // Log to be able to analyze later what format the data has
+        console.log(`[ERR] Unable to parse URI for ${URI} -> Decoded: ${decodedURI}`);
         return { success: false, URI: "" }
     }
 
