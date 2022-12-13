@@ -7,6 +7,45 @@
 
 **Tooling:** Node.js app using Express.js for routing, Jest and Supertest for testing, Sqlite3 for database storage (caching results and metadata), and jsonschema for metadata validation against the HIP412 JSON schema.
 
+## Database schema for NFT metadata
+
+The Express app uses Sqlite3 as the database. It's recommend to install Sqlite on your machine (e.g. on a [Debian 11 machine](https://linuxhint.com/install-sqlite-on-debian-11/)) to quickly manage the database. 
+
+To create the database, use the below command in the root of the project. 
+
+```bash
+sqlite3 nfts.db
+```
+
+This command opens an SQLite CLI. Now, create the `collections` table to store all metadata.
+
+```sql
+CREATE TABLE collections (
+  id INTEGER PRIMARY KEY AUTOINCREMENT,
+  nft_id VARCHAR(30) NOT NULL UNIQUE,
+  token_id VARCHAR(15) NOT NULL,
+  serial VARCHAR(7) NOT NULL,
+  is_conform NUMBER(1) NOT NULL,
+  network VARCHAR(7),
+  metadata text NOT NULL,
+  warnings text NOT NULL,
+  errors text NOT NULL,
+  created_at DATETIME DEFAULT CURRENT_TIMESTAMP NOT NULL
+);
+```
+
+To verify the schema has been created, use the `.tables` command.
+
+```sql
+.tables
+
+# Output
+collections
+```
+
+To exit the CLI, use `CMD+D`.
+
+
 ## How to run this project
 
 Install dependencies:

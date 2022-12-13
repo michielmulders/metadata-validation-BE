@@ -40,3 +40,5 @@ describe("POST /nfts/metadata", () => {
       expect(res.body.status).toBe(400);
     });
 });
+
+// add test to check if encode URI helper works? bXlzdHVwaWRzdHJpbmc= = mystupidstring in base64

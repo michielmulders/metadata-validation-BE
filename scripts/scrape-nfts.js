@@ -13,8 +13,8 @@ const { converter } = require("../helpers/URI");
 const BASE_URL = "https://mainnet-public.mirrornode.hedera.com/api/v1/tokens/";
 
 /* Results:
- * - Total number of NFTs to be scraped: 62499 from 48 projects.
- * - Average number of NFTs per project: 1302
+ * - Total number of NFTs to be scraped: 62599 from 49 projects.
+ * - Average number of NFTs per project: 1278
  */
 const tokens = [
     { tokenId: '0.0.1270555', name: 'Hash Crabs' },
@@ -64,7 +64,8 @@ const tokens = [
     { tokenId: '0.0.1013815', name: 'Master Creamer' },
     { tokenId: '0.0.825240', name: 'Warsome Wizards'},
     { tokenId: '0.0.1317440', name: 'Pixel Land - NumSkullz' },
-    { tokenId: '0.0.746240', name: 'Pixel Land - HBARMORY' }
+    { tokenId: '0.0.746240', name: 'Pixel Land - HBARMORY' },
+    { tokenId: '0.0.892230', name: 'PixelRug - Limited Edition Series 2022' }
 ];
 
 // Update code? Check if NFT ID already exists or overwrite (otherwise code crashes)
