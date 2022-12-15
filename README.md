@@ -65,19 +65,19 @@ select token_id, count(*) from collections group by token_id;
 0.0.1043046|507
 ...
 
-# Query: Total number of records
+# -> Query: Total number of records
 select count(*) from collections;
 
 # Output
 63275
 
-# Query: Total number of unique token IDs
+# -> Query: Total number of unique token IDs
 select count(DISTINCT token_id) from collections;
 
 # Output
 50
 
-# Query: Select record by NFT ID
+# -> Query: Select record by NFT ID
 select * from collections where nft_id like "0.0.1270555/5";
 
 # Output: One warning and no errors -> with unique ID = 5
