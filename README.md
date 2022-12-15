@@ -76,6 +76,12 @@ select count(DISTINCT token_id) from collections;
 
 # Output
 50
+
+# Query: Select record by NFT ID
+select * from collections where nft_id like "0.0.1270555/5";
+
+# Output: One warning and no errors -> with unique ID = 5
+5|0.0.1270555/5|0.0.1270555|5.0|0|mainnet|{"name":"Hashcrab","description":"Hashcrabs is one of the earliest NFT projects on Hedera Hashgraph. Generation 2.0 is designed in a 2D, pixelated, generative art style with various rarity traits. The etymology of Hashcrabs stems from the Hedera Hashgraph community and the native token $HBAR being commonly referred to as a “crab coin”. This is due to the “crabbing” market trend of $HBAR fluctuating around the same price over a long period of time, neither entering a bull nor bear market. As such, its movement mimics that of a crab moving side-to-side.","creator":"Hashcrabs","category":"Collectible","image":"ipfs://QmeS3UVvFMipTE16CZUVGLkfQ3vLRAozQqaXZcFAz6Sxt2","type":"image/png","attributes":[{"trait_type":"7 Background","value":"Hex #9cdb43"},{"trait_type":"6 Base","value":"Crab 10"},{"trait_type":"2 Eyewear","value":"Lennons"},{"trait_type":"1 Message Bubble","value":"Lfg"}]}|[{"type":"schema","msg":"is not allowed to have the additional property 'category'","path":"instance"}]|[]|2022-12-13 11:58:56
 ```
 
 ## How to run this project
