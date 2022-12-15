@@ -50,7 +50,7 @@ To exit the CLI, use `CMD+D`.
 
 At the root level of the project, you find the `nfts.db` and `nfts-copy.db` databases. The `nfts-copy.db` contains almost **64,000 records containing metadata but also verification data against HIP-412**. The data has been scraped from IPFS using the Pinata Gateway service. 
 
-The `scripts/scrape-nfts.js` script has performed the scraping and contains the list of `token_id`s used to populate the database. We've selected the most popular/high-volume projects on Hedera using zuse.market analytics. You can use this sqlite3 database however you want. 
+The `scripts/scrape-nfts.js` script has performed the scraping and contains the list of `token_id`'s used to populate the database. We've selected the most popular/high-volume projects on Hedera using zuse.market analytics. You can use this sqlite3 database however you want. 
 
 Sample queries to perform on the data:
 
