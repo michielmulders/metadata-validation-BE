@@ -43,6 +43,31 @@ To verify the schema has been created, use the `.tables` command.
 collections
 ```
 
+Sample queries:
+```sql
+# Query: Print token ID with its total number of serials
+select token_id, count(*) from collections group by token_id;
+
+# Output
+0.0.1003963|162
+0.0.1006183|1243
+0.0.1013815|105
+0.0.1043046|507
+...
+
+# Query: Total number of records
+select count(*) from collections;
+
+# Output
+63275
+
+# Query: Total number of unique token IDs
+select count(DISTINCT token_id) from collections;
+
+# Output
+50
+```
+
 To exit the CLI, use `CMD+D`.
 
 
