@@ -43,7 +43,17 @@ To verify the schema has been created, use the `.tables` command.
 collections
 ```
 
-Sample queries:
+To exit the CLI, use `CMD+D`.
+
+
+### Open source metadata database (64,000 records)
+
+At the root level of the project, you find the `nfts.db` and `nfts-copy.db` databases. The `nfts-copy.db` contains almost **64,000 records containing metadata but also verification data against HIP-412**. The data has been scraped from IPFS using the Pinata Gateway service. 
+
+The `scripts/scrape-nfts.js` script has performed the scraping and contains the list of `token_id`s used to populate the database. We've selected the most popular/high-volume projects on Hedera using zuse.market analytics. You can use this sqlite3 database however you want. 
+
+Sample queries to perform on the data:
+
 ```sql
 # Query: Print token ID with its total number of serials
 select token_id, count(*) from collections group by token_id;
@@ -67,9 +77,6 @@ select count(DISTINCT token_id) from collections;
 # Output
 50
 ```
-
-To exit the CLI, use `CMD+D`.
-
 
 ## How to run this project
 
