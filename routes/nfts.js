@@ -89,7 +89,7 @@ router.get('/:id/:serial', async (req, res, next) => {
   try {
     nftInfo = await axiosInstance.get(tokenInfoURI);
   } catch (error) {
-    return next(errorFormatter(`Unable to fetch token information for ${nftId} (NFT ID doesn't exist)`));
+    return next(errorFormatter(`Unable to fetch token information for ${nftId} (NFT ID might not exist or could not fetch information from IPFS)`));
   }
   
   const URIObject = converter(nftInfo.data.metadata);

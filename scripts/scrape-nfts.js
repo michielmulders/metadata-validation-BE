@@ -17,54 +17,54 @@ const BASE_URL = "https://mainnet-public.mirrornode.hedera.com/api/v1/tokens/";
  * - Average number of NFTs per project: 1278
  */
 const tokens = [
-   // { tokenId: '0.0.1270555', name: 'Hash Crabs' },
+   { tokenId: '0.0.1270555', name: 'Hash Crabs' },
     { tokenId: '0.0.1350444', name: 'HANGRY BARBOONS' },
     { tokenId: '0.0.1043046', name: 'ASHFALL' },
     { tokenId: '0.0.1006183', name: 'Hedera Monkeys' },
-   // { tokenId: '0.0.732556', name: 'PLANCK EPOCH COLLECTIBLES - ELECTROMAGNETIC' },
+   { tokenId: '0.0.732556', name: 'PLANCK EPOCH COLLECTIBLES - ELECTROMAGNETIC' },
     { tokenId: '0.0.1127032', name: 'EARTH-SW' },
-   // { tokenId: '0.0.968134', name: 'Fugitives V1' },
-   // { tokenId: '0.0.1235089', name: 'HBAR SHADY\'z GEN-02' },
-   // { tokenId: '0.0.1003963', name: 'Hederian Dragons Gen-01 Origins' },
+   { tokenId: '0.0.968134', name: 'Fugitives V1' },
+   { tokenId: '0.0.1235089', name: 'HBAR SHADY\'z GEN-02' },
+   { tokenId: '0.0.1003963', name: 'Hederian Dragons Gen-01 Origins' },
     { tokenId: '0.0.752616', name: 'Shibar Holder - Silver Limited Edition' },
     { tokenId: '0.0.1282534', name: 'EARTH-AIR' },
-   // { tokenId: '0.0.1374909', name: 'Sentient Nightmares' },
-   // { tokenId: '0.0.895128', name: 'METAVISION GEN2' },
-   // { tokenId: '0.0.1158353', name: 'Loco Lizardz' },
-   // { tokenId: '0.0.1064955', name: 'Hashgraph Phantoms' },
+   { tokenId: '0.0.1374909', name: 'Sentient Nightmares' },
+   { tokenId: '0.0.895128', name: 'METAVISION GEN2' },
+   { tokenId: '0.0.1158353', name: 'Loco Lizardz' },
+   { tokenId: '0.0.1064955', name: 'Hashgraph Phantoms' },
     { tokenId: '0.0.1106034', name: 'WokeFemmes' },
     { tokenId: '0.0.1124044', name: 'Golden Banana Coin' },
-   // { tokenId: '0.0.968220', name: 'Fugitives V1 Pets' },
+   { tokenId: '0.0.968220', name: 'Fugitives V1 Pets' },
     { tokenId: '0.0.1097636', name: 'Cyber Hedera Gen-02' },
-   // { tokenId: '0.0.946799', name: 'WOOKZ Gen. 1' },
+   { tokenId: '0.0.946799', name: 'WOOKZ Gen. 1' },
     { tokenId: '0.0.1110968', name: 'Sentient Dreams' },
-   // { tokenId: '0.0.822309', name: 'Gold Trainer Pass (GTP)' },
-   // { tokenId: '0.0.872340', name: 'Dead Pixels Ghost Pass' },
+   { tokenId: '0.0.822309', name: 'Gold Trainer Pass (GTP)' },
+   { tokenId: '0.0.872340', name: 'Dead Pixels Ghost Pass' },
     { tokenId: '0.0.878200', name: 'Dead Pixels Ghost Club' },
-   // { tokenId: '0.0.1052238', name: 'Kabila Early Supporters' },
+   { tokenId: '0.0.1052238', name: 'Kabila Early Supporters' },
     { tokenId: '0.0.1319909', name: 'Koala Klub Gen 2 (1 point)' },
-   // { tokenId: '0.0.650778', name: 'Koala Klub Gen 1' },
+   { tokenId: '0.0.650778', name: 'Koala Klub Gen 1' },
     { tokenId: '0.0.1404861', name: 'Creamlands Silver' },
-   // { tokenId: '0.0.930110', name: 'Creamies Collection' },
+   { tokenId: '0.0.930110', name: 'Creamies Collection' },
     { tokenId: '0.0.1393115', name: 'LeemonSwap NFT Presale' },
     { tokenId: '0.0.640346', name: 'Hbar Punks' },
     { tokenId: '0.0.1413405', name: 'Gangsters Paradise: Lucchese Family' },
     { tokenId: '0.0.1097737', name: 'EARTH-FC' },
-   // { tokenId: '0.0.817591', name: 'HGraph Punks' },
+   { tokenId: '0.0.817591', name: 'HGraph Punks' },
     { tokenId: '0.0.1380808', name: 'VCEEZY v2' },
-   // { tokenId: '0.0.1298985', name: 'Return Pass' },
+   { tokenId: '0.0.1298985', name: 'Return Pass' },
     { tokenId: '0.0.1440564', name: 'Hashmons Gen 1 PFPs' },
     { tokenId: '0.0.1321559', name: 'Hedera Arcade' },
     { tokenId: '0.0.1404743', name: 'Creamlands Diamond' },
     { tokenId: '0.0.1236771', name: 'EARTH-PIN' },
     { tokenId: '0.0.1404762', name: 'Creamlands Platinum' },
-   // { tokenId: '0.0.1404804', name: 'Creamlands Gold' },
-   // { tokenId: '0.0.1099951', name: 'Deragods' },
+   { tokenId: '0.0.1404804', name: 'Creamlands Gold' },
+   { tokenId: '0.0.1099951', name: 'Deragods' },
     { tokenId: '0.0.1234197', name: 'Hashgraph Name - hbar' },
-   // { tokenId: '0.0.1013815', name: 'Master Creamer' },
+   { tokenId: '0.0.1013815', name: 'Master Creamer' },
     { tokenId: '0.0.825240', name: 'Warsome Wizards'},
     { tokenId: '0.0.1317440', name: 'Pixel Land - NumSkullz' },
-   // { tokenId: '0.0.746240', name: 'Pixel Land - HBARMORY' },
+   { tokenId: '0.0.746240', name: 'Pixel Land - HBARMORY' },
     { tokenId: '0.0.892230', name: 'PixelRug - Limited Edition Series 2022' }
 ];
 
@@ -203,7 +203,8 @@ async function countTotalNumberOfNFTs() {
         tokenInfo = await axiosInstance.get(`${BASE_URL}${tokens[i].tokenId}/`);
       }
       const maxSerial = Number(tokenInfo.data.total_supply);
-      console.log(`[INFO] Project: ${tokens[i].name} --> serials: ${maxSerial}`)
+      // console.log(`[INFO] Project: ${tokens[i].name} --> serials: ${maxSerial}`)
+      console.log(`${tokens[i].tokenId} ${maxSerial}`);
       total += maxSerial;
       sleep(2500)
     } catch (error) {
@@ -224,8 +225,8 @@ function sleep(miliseconds) {
 
 /* Main function that determines which function to execute */
 async function main() {
-  // await countTotalNumberOfNFTs();
-  await scrapeNFTs();
+  await countTotalNumberOfNFTs();
+  //await scrapeNFTs();
 }
 
 main();
