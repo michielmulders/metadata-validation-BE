@@ -10,9 +10,12 @@
  * @example aXBmczovL1FtVmh4aFVpZXgzSzNVUzl4Z2M4VndpYjN2NmllUng2dTRpWHBMVm5Rd0x5SjE= converts to ipfs://QmVhxhUiex3K3US9xgc8Vwib3v6ieRx6u4iXpLVnQwLyJ1
  * @see {@link https://docs.ipfs.tech/concepts/content-addressing/#cid-inspector}
  */
-const converter = (URI) => {
+const converter = (URI, decode = true) => {
     // 1. Decode the base64 to UTF8 (Hedera's default encoding)
-    const decodedURI = decode(URI);
+    let decodedURI = URI;
+    if (decode) {
+        decodedURI = decode(URI);
+    }
 
     // 2. Check URI type (HTTPS or IPFS) - if it's not supported, throw error)
     let result;

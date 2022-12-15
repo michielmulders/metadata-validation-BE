@@ -3,13 +3,23 @@ const db = require('./db');
 /**
  * 
  * @param {string} nftId - Uses the format "<tokenId>/<serial>" e.g. "0.0.130481/789"
- * @returns {object} NFT
  * @returns {Array<Object>} NFT.data - Array containing zero, one, or multiple collection objects from the DB.
  */
 function getNFTById(nftId) {
   const data = db.query(`SELECT * FROM collections where nft_id = ?`, [nftId]);
 
-  return { data }
+  return { data };
+}
+
+/**
+ * 
+ * @param {string} tokenId - Uses the format "0.0.XXXXX" e.g. "0.0.130481"
+ * @returns {Array<Object>} NFT.data - Array containing zero, one, or multiple collection objects from the DB.
+ */
+function getAllNFTsByTokenId(tokenId) {
+  const data = db.query(`SELECT * FROM collections where token_id = ?`, [tokenId]);
+
+  return { data };
 }
 
 /**
@@ -44,5 +54,6 @@ function create(nftId, tokenId, serial, isConform, network, metadata, warnings, 
 
 module.exports = {
   getNFTById,
+  getAllNFTsByTokenId,
   create
 }
