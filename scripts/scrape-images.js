@@ -12,7 +12,7 @@ const { converter } = require("../helpers/URI");
 
 /* Vars */
 const tokens = [
-    { tokenId: '0.0.1404743', name: 'Creamlands Diamond', ext: 'jpg' } // 20 NFTs in this collection
+    { tokenId: '0.0.1404743', name: 'Creamlands Diamond', ext: 'jpg' }, // 20 NFTs in this collection
 
     /*
     { tokenId: '0.0.1270555', name: 'Hash Crabs', ext: 'jpg' },
@@ -56,7 +56,7 @@ const tokens = [
     { tokenId: '0.0.1013815', name: 'Master Creamer', ext: 'png' },
     { tokenId: '0.0.1317440', name: 'Pixel Land - NumSkullz', ext: 'png' },
     { tokenId: '0.0.746240', name: 'Pixel Land - HBARMORY', ext: 'png' },
-    { tokenId: '0.0.892230', name: 'PixelRug - Limited Edition Series 2022', ext: 'png' }
+    { tokenId: '0.0.892230', name: 'PixelRug - Limited Edition Series 2022', ext: 'png' },
 
     // SKIP: data:image/png;base64 (JSON.photo)
     // Exception: image: { type: 'string', description: 'https://cloudflare-ipfs.com/ipfs/bafkreidwvc62jt5eo2vhwpxnhuknf4gz6ntqym6knagwf65yfajkbnrbkm' }

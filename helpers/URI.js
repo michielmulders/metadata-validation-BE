@@ -20,23 +20,29 @@ const converter = (URI, decode = true) => {
     // 2. Check URI type (HTTPS or IPFS) - if it's not supported, throw error)
     let result;
 
-    // A. Check for IPFS
+    // A. Check for type=string
+    if (typeof decodedURI !== "string") {
+        console.log(`[ERR] Unable to parse URI (not a string)`);
+        return { success: false, URI: "" }
+    }
+
+    // B. Check for IPFS
     if (decodedURI.indexOf("ipfs://") === 0) {
         const CID = decodedURI.replace('ipfs://', '');
         result = `${process.env.IPFS_GATEWAY}/ipfs/${CID}/?pinataGatewayToken=${process.env.PINATA_API_TOKEN}`;
     }
 
-    // B. Check for HTTPS
+    // C. Check for HTTPS
     if (decodedURI.indexOf("https://") === 0) {
         result = decodedURI;
     }
 
-    // C. Check if the string starts with "Qm" which indicates a CID (base36) -> If a CID is 46 characters starting with "Qm", it's a CIDv0
+    // D. Check if the string starts with "Qm" which indicates a CID (base36) -> If a CID is 46 characters starting with "Qm", it's a CIDv0
     if (decodedURI.indexOf("Qm") === 0) {
         result = `${process.env.IPFS_GATEWAY}/ipfs/${decodedURI}/?pinataGatewayToken=${process.env.PINATA_API_TOKEN}`;
     }
 
-    // D. Check if the string starts with the "baf" which indicates a CID (case-insensitive base32) -> CID v1
+    // E. Check if the string starts with the "baf" which indicates a CID (case-insensitive base32) -> CID v1
     if (decodedURI.indexOf("baf") === 0) {
         result = `${process.env.IPFS_GATEWAY}/ipfs/${decodedURI}/?pinataGatewayToken=${process.env.PINATA_API_TOKEN}`;
     }
