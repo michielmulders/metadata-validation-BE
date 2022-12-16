@@ -52,7 +52,7 @@ const tokens = [
     { tokenId: '0.0.1404762', name: 'Creamlands Platinum', ext: 'png' },
     { tokenId: '0.0.1404804', name: 'Creamlands Gold', ext: 'png' },
     { tokenId: '0.0.1099951', name: 'Deragods', ext: 'png' },
-    { tokenId: '0.0.1234197', name: 'Hashgraph Name - hbar', ext: 'jpeg' },
+    { tokenId: '0.0.1234197', name: 'Hashgraph Name - hbar', ext: 'jpeg' }, // 16k records - serial 17 has -1 value for "image" field
     { tokenId: '0.0.1013815', name: 'Master Creamer', ext: 'png' },
     { tokenId: '0.0.1317440', name: 'Pixel Land - NumSkullz', ext: 'png' },
     { tokenId: '0.0.746240', name: 'Pixel Land - HBARMORY', ext: 'png' },
