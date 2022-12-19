@@ -54,7 +54,7 @@ const tokens = [
     { tokenId: '0.0.1099951', name: 'Deragods', ext: 'png' },
     { tokenId: '0.0.1234197', name: 'Hashgraph Name - hbar', ext: 'jpeg' }, // 16k records - serial 17 has -1 value for "image" field
     { tokenId: '0.0.1013815', name: 'Master Creamer', ext: 'png' },
-    { tokenId: '0.0.1317440', name: 'Pixel Land - NumSkullz', ext: 'png' },
+    { tokenId: '0.0.1317440', name: 'Pixel Land - NumSkullz', ext: 'png' }, // couple of images result in 404
     { tokenId: '0.0.746240', name: 'Pixel Land - HBARMORY', ext: 'png' },
     { tokenId: '0.0.892230', name: 'PixelRug - Limited Edition Series 2022', ext: 'png' },
 
@@ -115,6 +115,11 @@ async function scrapeImages() {
                 imageResponse.data.pipe(fs.createWriteStream(`./data/${tokens[i].tokenId}/img-${tokens[i].tokenId}-${j}.${tokens[i].ext}`));
                 console.log(`[INFO] Image downloaded: img-${tokens[i].tokenId}-${j}.${tokens[i].ext}`);
             } catch (error) {
+                if (error.response.status === 404) {
+                    console.log(`[CRIT] Image doesn't exist for img-${tokens[i].tokenId}-${j}.${tokens[i].ext}`);
+                    continue;
+                }
+
                 console.log(`[ERR] Could not fetch data for: ${tokens[i].tokenId} - Name: ${tokens[i].name} - Serial: ${j}`);
                 failedFetching = true;
             }
