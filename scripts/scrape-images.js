@@ -93,7 +93,7 @@ async function scrapeImages() {
             fs.mkdirSync(`./data/${tokens[i].tokenId}`);
         }
 
-        for (let j = 0; j < nftData.data.length; j++) {
+        for (let j = 1; j <= nftData.data.length; j++) {
             const nftObject = JSON.parse(nftData.data[j].metadata);
 
             const imageURI = handleImageFormatExceptions(tokens[i].tokenId, nftObject);
