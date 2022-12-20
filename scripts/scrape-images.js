@@ -70,7 +70,7 @@ const tokens = [
     { tokenId: '0.0.752616', name: 'Shibar Holder - Silver Limited Edition', ext: 'png' },
 
     // Exception: no image: { name: 'Hbar Punks ', description: 'The Hbar Punks are 10,000 uniquely generated characters. No two are exactly alike, and each one of them can be officially owned by a single person on the Hedera Token Service (HTS). HTS reduces the total cost of issuance and management, improves transaction settlement time from hours to seconds.', creator: 'hbarpunks', CID: 'https://bafkreid7ktpwlg3y6xbchlwhlhsdd5oer7urm6nk5seygducd2b6ghm36m.ipfs.dweb.link/' }
-    { tokenId: '0.0.640346', name: 'Hbar Punks', ext: 'jpg' },
+    { tokenId: '0.0.640346', name: 'Hbar Punks', ext: 'png' },
 
     // SKIP: GLB file extension -> 3D render - doens't contain any other files
     //{ tokenId: '0.0.1298985', name: 'Return Pass', ext: 'glb' },
