@@ -1,6 +1,10 @@
 # Test database
 testnfts.db
 
+# Custom
+data/
+name-changer.js
+
 # Logs
 logs
 *.log
